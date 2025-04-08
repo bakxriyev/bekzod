@@ -1,19 +1,26 @@
 "use client"
 
 import type React from "react"
-
 import { useState, useRef, useEffect } from "react"
 import { Volume2, VolumeX, X } from "lucide-react"
 
 export default function VideoPlayer() {
   const [isMuted, setIsMuted] = useState(true)
   const [isVisible, setIsVisible] = useState(true)
-  const [position, setPosition] = useState({ x: 20, y: window.innerHeight - 350 })
+  const [position, setPosition] = useState({ x: 20, y: 0 }) // Initialize y to 0
   const [isDragging, setIsDragging] = useState(false)
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 })
   const videoRef = useRef<HTMLVideoElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const [isEnlarged, setIsEnlarged] = useState(false)
+
+  // Initialize position after component mounts (client-side)
+  useEffect(() => {
+    setPosition({
+      x: 20,
+      y: window.innerHeight - 350
+    })
+  }, [])
 
   // Toggle mute
   const toggleMute = (e: React.MouseEvent) => {
@@ -192,4 +199,3 @@ export default function VideoPlayer() {
     </>
   )
 }
-
