@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Instagram, Youtube, Phone } from "lucide-react"
+import { Instagram, Youtube } from "lucide-react"
 
 export default function Navbar({
   activeSection,
@@ -16,8 +16,8 @@ export default function Navbar({
 
   return (
     <header className="sticky top-0 z-40 w-full bg-black/90 backdrop-blur-sm">
-      <nav className="container mx-auto gap-20 px-4 md:px-12 py-4 flex justify-between items-stretch">
-        <div className="text-white font-bold text-xl">BEKZOD KHANOV </div>
+      <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
+        <div className="text-white font-bold text-xl">BEKZOD KHANOV</div>
 
         {isMobile ? (
           <div className="flex items-center gap-4">
@@ -27,7 +27,7 @@ export default function Navbar({
                 href="https://www.instagram.com/khanov.bekzod/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white hover:text-green-400"
+                className="text-white"
               >
                 <Instagram size={20} />
               </a>
@@ -35,7 +35,7 @@ export default function Navbar({
                 href="https://www.youtube.com/@KhanovBekzod"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white hover:text-green-400"
+                className="text-white"
               >
                 <Youtube size={20} />
               </a>
@@ -53,7 +53,7 @@ export default function Navbar({
             <div className="flex space-x-6 mr-8">
               <button
                 onClick={() => scrollToSection("kurs-vazifasi")}
-                className={`text-white hover:text-green-400 text-lg ${
+                className={`text-white text-lg ${
                   activeSection === "kurs-vazifasi" ? "text-green-400 font-semibold" : ""
                 }`}
               >
@@ -61,15 +61,13 @@ export default function Navbar({
               </button>
               <button
                 onClick={() => scrollToSection("kim-uchun")}
-                className={`text-white hover:text-green-400 text-lg ${
-                  activeSection === "kim-uchun" ? "text-green-400 font-semibold" : ""
-                }`}
+                className={`text-white text-lg ${activeSection === "kim-uchun" ? "text-green-400 font-semibold" : ""}`}
               >
                 KURS KIMLAR UCHUN
               </button>
               <button
                 onClick={() => scrollToSection("kurs-dasturi")}
-                className={`text-white hover:text-green-400 text-lg ${
+                className={`text-white text-lg ${
                   activeSection === "kurs-dasturi" ? "text-green-400 font-semibold" : ""
                 }`}
               >
@@ -77,29 +75,25 @@ export default function Navbar({
               </button>
               <button
                 onClick={() => scrollToSection("muallif")}
-                className={`text-white hover:text-green-400 text-lg ${
-                  activeSection === "muallif" ? "text-green-400 font-semibold" : ""
-                }`}
+                className={`text-white text-lg ${activeSection === "muallif" ? "text-green-400 font-semibold" : ""}`}
               >
                 KURS MUALLIFI
               </button>
               <button
                 onClick={() => scrollToSection("narx")}
-                className={`text-white hover:text-green-400 text-lg ${
-                  activeSection === "narx" ? "text-green-400 font-semibold" : ""
-                }`}
+                className={`text-white text-lg ${activeSection === "narx" ? "text-green-400 font-semibold" : ""}`}
               >
                 TARIFLAR
               </button>
             </div>
 
-            {/* Social icons and contact */}
+            {/* Social icons */}
             <div className="flex items-center gap-4">
               <a
                 href="https://www.instagram.com/khanov.bekzod/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white hover:text-green-400"
+                className="text-white"
               >
                 <Instagram size={20} />
               </a>
@@ -107,27 +101,21 @@ export default function Navbar({
                 href="https://www.youtube.com/@KhanovBekzod"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white hover:text-green-400"
+                className="text-white"
               >
                 <Youtube size={20} />
               </a>
-              <a
-                href="https://t.me/khanov_business"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white hover:text-green-400"
-              >
+              <a href="https://t.me/khanov_business" target="_blank" rel="noopener noreferrer" className="text-white">
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-1.97 9.269c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.333.234-.633.234l.274-3.035 5.532-5c.287-.258-.07-.392-.404-.16l-6.816 4.287-2.9-.967c-.633-.2-.633-.643.146-.954l11.337-4.377c.533-.194.989.126.814.814l.15.017z" />
                 </svg>
               </a>
-             
             </div>
           </div>
         )}
       </nav>
 
-      {/* Mobile menu */}
+      {/* Mobile menu - simplified */}
       {isMobile && isMenuOpen && (
         <div className="md:hidden bg-black py-3">
           <div className="px-4 pt-3 pb-4 space-y-3">
@@ -193,7 +181,7 @@ export default function Navbar({
                 href="https://www.instagram.com/khanov.bekzod/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white hover:text-green-400"
+                className="text-white"
               >
                 <Instagram size={20} />
               </a>
@@ -201,21 +189,15 @@ export default function Navbar({
                 href="https://www.youtube.com/@KhanovBekzod"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white hover:text-green-400"
+                className="text-white"
               >
                 <Youtube size={20} />
               </a>
-              <a
-                href="https://t.me/khanov_business"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white hover:text-green-400"
-              >
+              <a href="https://t.me/khanov_business" target="_blank" rel="noopener noreferrer" className="text-white">
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-1.97 9.269c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.333.234-.633.234l.274-3.035 5.532-5c.287-.258-.07-.392-.404-.16l-6.816 4.287-2.9-.967c-.633-.2-.633-.643.146-.954l11.337-4.377c.533-.194.989.126.814.814l.15.017z" />
                 </svg>
               </a>
-             
             </div>
           </div>
         </div>
@@ -223,4 +205,3 @@ export default function Navbar({
     </header>
   )
 }
-

@@ -14,14 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <link rel="icon" type="image/png" href="/khanov.png" />
-        <link rel="preload" href="/background.webp" as="image" />
-        <link rel="preload" href="/kitob.webp" as="image" />
-        <link rel="preload" href="/yaxshi.webp" as="image" />
-      </head>
       <body className="antialiased">{children}</body>
     </html>
   )
 }
-

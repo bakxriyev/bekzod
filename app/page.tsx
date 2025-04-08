@@ -19,28 +19,48 @@ import VideoPlayer from "@/components/video-player"
 import FAQSection from "@/components/faq-section"
 import { Suspense } from "react"
 
+// Define sections for navigation
+const sections = [
+  { id: "hero", Component: Hero },
+  { id: "kurs-vazifasi", Component: Features },
+  { id: "why", Component: WhyThisCourse },
+  { id: "who", Component: BookLanding },
+  { id: "kim-uchun", Component: WhoIsThisFor },
+  { id: "kursdan-keyin", Component: KursdanKeyin },
+  { id: "kurs-dasturi", Component: CourseModules },
+  { id: "muallif", Component: Instructor },
+  { id: "narx", Component: TarifRejalari },
+  { id: "sotuv-mutaxassisi", Component: SotuvMutaxassis },
+  { id: "bonuslar", Component: Bonuslar },
+  { id: "faq", Component: FAQSection },
+  { id: "boglanish", Component: CallToAction },
+]
+
 export default function LandingPage() {
   const [activeSection, setActiveSection] = useState("hero")
   const [isMobile, setIsMobile] = useState(false)
   const sectionRefs = useRef<(HTMLDivElement | null)[]>([])
 
+  // Check for mobile once on client side
   useEffect(() => {
+    setIsMobile(window.innerWidth <= 768)
+
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768)
     }
 
-    handleResize()
     window.addEventListener("resize", handleResize)
     return () => window.removeEventListener("resize", handleResize)
   }, [])
 
+  // Simple intersection observer with reduced sensitivity
   useEffect(() => {
     if (isMobile) return
 
     const observerOptions = {
       root: null,
       rootMargin: "0px",
-      threshold: 0.5,
+      threshold: 0.3,
     }
 
     const observer = new IntersectionObserver((entries) => {
@@ -65,7 +85,10 @@ export default function LandingPage() {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId)
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
+      window.scrollTo({
+        top: element.offsetTop,
+        behavior: "auto", // Changed from smooth to auto for better performance
+      })
     }
   }
 
@@ -82,34 +105,31 @@ export default function LandingPage() {
           backgroundPosition: "center",
         }}
       >
-        {/* Modified main container - removed snap scrolling for better visibility */}
         <main className="pb-16">
-          {[
-            { id: "hero", Component: Hero },
-            { id: "kurs-vazifasi", Component: Features },
-            { id: "why", Component: WhyThisCourse },
-            { id: "who", Component: BookLanding },
-            { id: "kim-uchun", Component: WhoIsThisFor },
-            { id: "kursdan-keyin", Component: KursdanKeyin },
-            { id: "kurs-dasturi", Component: CourseModules },
-            { id: "muallif", Component: Instructor },
-            { id: "narx", Component: TarifRejalari },
-            { id: "sotuv-mutaxassisi", Component: SotuvMutaxassis },
-            { id: "bonuslar", Component: Bonuslar },
-            { id: "faq", Component: FAQSection },
-            { id: "boglanish", Component: CallToAction },
-          ].map(({ id, Component }, index) => (
+          {sections.map(({ id, Component }, index) => (
             <section
               key={id}
               id={id}
               ref={(el) => {
                 if (sectionRefs.current) sectionRefs.current[index] = el
               }}
-              className="py-20" // Increased padding for more space
+              className="py-16"
             >
-              <Suspense fallback={<div className="flex items-center justify-center h-[50vh]">Loading...</div>}>
+              {index < 3 ? (
+                // Render first 3 sections immediately for faster initial load
                 <Component />
-              </Suspense>
+              ) : (
+                // Lazy load the rest of the sections
+                <Suspense
+                  fallback={
+                    <div className="h-[50vh] flex items-center justify-center">
+                      <div className="w-6 h-6 border-2 border-black rounded-full border-t-transparent animate-spin"></div>
+                    </div>
+                  }
+                >
+                  <Component />
+                </Suspense>
+              )}
             </section>
           ))}
         </main>
@@ -122,4 +142,3 @@ export default function LandingPage() {
     </div>
   )
 }
-
